@@ -1,6 +1,5 @@
-
-
 #include <iostream>
+#include <string>
 
 #include "ntp_client.h"
 
@@ -43,16 +42,19 @@ int main(int argc, char** argv)  // C style example
     if (s == Status::OK) {                          // if status ok, print info
       Client__format_info_str(result, result_str);  // format info into string
       Client__free_result(result);                  // delete dynamic object
-      MessageBoxA(NULL, result_str, "OK :)", MB_OK);
+      auto msg = std::string("OK -> ") + std::string(ip);
+      MessageBoxA(NULL, result_str, msg.c_str(), MB_OK);
       return 0;
     } else {                        // if status not ok, quit
       Client__free_result(result);  // delete dynamic object
-      MessageBoxA(NULL, "Failed to update.", "NG :(", MB_OK | MB_ICONERROR);
+      auto msg = std::string("NG -> ") + std::string(ip);
+      MessageBoxA(NULL, "Failed to update.", msg.c_str(), MB_OK | MB_ICONERROR);
       return -1;
     }
   } catch (const std::exception& exc)  // catch any exception
   {
-    MessageBoxA(NULL, exc.what(), "NG :(", MB_OK);
+    auto msg = std::string("NG -> ") + std::string(ip);
+    MessageBoxA(NULL, exc.what(), msg.c_str(), MB_OK);
     return -1;
   }
 }
