@@ -4,7 +4,7 @@ project(
   VERSION 0.1.0
   LANGUAGES C CXX)
 
-add_executable(win-ntp-client ntp_client.cpp main.cpp)
+add_executable(win-ntp-client ntp_client.cpp main.cpp icon.rc)
 
 add_compile_options(/utf-8)
 
